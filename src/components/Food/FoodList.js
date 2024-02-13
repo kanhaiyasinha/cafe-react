@@ -13,24 +13,39 @@ export default function FoodList(props) {
 
     useEffect(() => {
         const fetchFoodData = async () => {
-            const res = await fetch("https://cafe-react-95e4d-default-rtdb.firebaseio.com/foodData.json");
 
+            //Assuming your Data as an Array
+            const res = await fetch("https://cafe-react-4106f-default-rtdb.firebaseio.com/foodData.json");
+            
+            // Assuming your Data as an Object
+            //const res = await fetch("https://cafe-react-95e4d-default-rtdb.firebaseio.com/foodData.json")
+            
+            
             if (!res.ok) {
-                throw new Error("Spmething went wrong!");
+                throw new Error("Something went wrong!");
             }
 
             const resData = await res.json();
-            const loadedFoodData = [];
-            for (let key in resData) {
-                for (let dataItem of resData[key]) {
-                    const foodDataItem = {
-                        ...dataItem,
-                    };
-                    loadedFoodData.push(foodDataItem);
-                }
-            }
+
+            // Assuming your data is an array directly under "foodData" key
+            const loadedFoodData = Object.values(resData);
+
             setIsLoading(false);
             setFoodData(loadedFoodData);
+
+            //Assuming your Data as an Object
+            // const resData = await res.json();
+            // const loadedFoodData = [];
+            // for (let key in resData) {
+            //     for (let dataItem of resData[key]) {
+            //         const foodDataItem = {
+            //             ...dataItem,
+            //         };
+            //         loadedFoodData.push(foodDataItem);
+            //     }
+            // }
+            // setIsLoading(false);
+            // setFoodData(loadedFoodData);
         };
 
         fetchFoodData().catch((error) => {

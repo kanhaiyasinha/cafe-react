@@ -19,7 +19,7 @@ export default function Cart(props) {
     };
 
     const onConfirmHandler = (userData) => {
-        fetch("https://cafe-react-95e4d-default-rtdb.firebaseio.com/orders.json", {
+        fetch("https://cafe-react-4106f-default-rtdb.firebaseio.com/orders.json", {
             method: "POST",
             body: JSON.stringify({
                 order: cartCtx.items,
